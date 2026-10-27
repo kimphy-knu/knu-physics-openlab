@@ -135,6 +135,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
 .spk dt{font-size:12px;font-weight:700;color:var(--faint);letter-spacing:.04em}
 .spk dd{margin:2px 0 0;font-size:15px;color:var(--fg)}
 .spk dd.soon{color:var(--faint)}
+.person .intro{margin:8px 0 0;font-size:14px;line-height:1.55;color:var(--fg)}
+.person .kw{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.person .kw span{font-size:12px;font-weight:600;color:var(--c);background:var(--t);border-radius:999px;padding:3px 10px}
 .person .links{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px;font-size:14px;font-weight:600}
 /* ask */
 .ask{padding-block:72px}
@@ -235,7 +238,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
       <p class="sec-lede">여섯 개 분야, 스무 명의 교수님 연구실을 소개합니다. 모든 연구실은 미래융합과학관에 있습니다.</p>
       <div class="controls">
         <div class="seg" id="seg" role="group" aria-label="연구 분야 선택"></div>
-        <label class="find"><svg viewBox="0 0 16 16" fill="none" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5" stroke-linecap="round"/></svg><input id="q" type="search" placeholder="이름 또는 전공" aria-label="이름 또는 전공 검색"></label>
+        <label class="find"><svg viewBox="0 0 16 16" fill="none" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5" stroke-linecap="round"/></svg><input id="q" type="search" placeholder="이름, 연구실, 키워드" aria-label="이름 또는 전공 검색"></label>
       </div>
       <div id="list"></div>
     </div>
@@ -297,26 +300,26 @@ const FIELDS=[
  {id:"stat",c:"#378a37",t:"#e2f1e0",ko:"통계물리",en:"Statistical Physics",d:"많은 입자가 모인 계에서 나타나는 집단 현상과 요동을 다룹니다."}
 ];
 const P=[
- {n:"강경태",major:"응집물질물리 실험",room:"238",tel:"053-950-5325",mail:"ktkang@knu.ac.kr",web:"https://qphd.notion.site/",f:"cmp"},
- {n:"김봉재",major:"응집물질물리 이론",room:"326",tel:"053-950-5324",mail:"bongjae@knu.ac.kr",web:"https://sites.google.com/site/bjaekim/",f:"cmp"},
- {n:"도중회",major:"응집물질물리",room:"239",tel:"053-950-7354",mail:"jhdho@knu.ac.kr",web:"https://jhdho.knu.ac.kr/",f:"cmp"},
- {n:"이지은",major:"응집물질물리",room:"333",tel:"053-950-7350",mail:"lee.jieun@knu.ac.kr",f:"cmp"},
- {n:"조연정",major:"응집물질물리",room:"324",tel:"053-950-7352",mail:"jophy@knu.ac.kr",web:"https://sites.google.com/view/labqcmp/",f:"cmp"},
- {n:"김도형",major:"나노물리 · 응집물질물리",room:"240",tel:"053-950-5319",mail:"kimdh@knu.ac.kr",f:"nano"},
- {n:"이형철",major:"나노물리 · 응집물질물리",room:"327",tel:"053-950-5328",mail:"hcri@knu.ac.kr",f:"nano"},
- {n:"노창석",major:"광학 및 양자정보",room:"328",tel:"053-950-5317",mail:"cnoh@knu.ac.kr",f:"opt"},
- {n:"여준엽",major:"광학 및 양자정보 · 나노물리",room:"241",tel:"053-950-7360",mail:"junyeob@knu.ac.kr",web:"https://sites.google.com/site/junyeob/",f:"opt"},
- {n:"조명래",major:"양자과학기술 실험",room:"331",tel:"053-950-5320",mail:"myunglae.jo@knu.ac.kr",web:"https://sites.google.com/view/qedlab/home",f:"opt"},
- {n:"강국현",major:"고에너지물리",room:"234",tel:"053-950-7373",mail:"khkang@knu.ac.kr",f:"hep"},
- {n:"김홍주",major:"고에너지물리",room:"236",tel:"053-950-5323",mail:"hongjoo@knu.ac.kr",web:"http://rnd2.knu.ac.kr:8080/",f:"hep"},
- {n:"문창성",major:"고에너지물리",room:"235",tel:"053-950-6383",mail:"csmoon@knu.ac.kr",web:"https://cern.ch/csmoon",f:"hep"},
- {n:"박정식",major:"고에너지물리",room:"237",tel:"053-950-5321",mail:"jungsicpark@knu.ac.kr",f:"hep"},
- {n:"배규정",major:"고에너지물리",room:"329",tel:"053-950-5326",mail:"kyujung.bae@knu.ac.kr",f:"hep"},
- {n:"윤석훈",major:"입자우주론 · 천체입자물리",room:"332",tel:"053-950-7349",mail:"seokhoon.yun@knu.ac.kr",f:"hep"},
- {n:"이세욱",major:"고에너지물리",room:"232",tel:"053-950-7372",mail:"sehwook.lee@knu.ac.kr",web:"http://majorana.knu.ac.kr/",f:"hep"},
- {n:"김신형",major:"핵물리",room:"325",tel:"053-950-5327",mail:"shinhyung@knu.ac.kr",f:"nuc"},
- {n:"조현석",major:"핵물리",room:"233",tel:"053-950-7377",mail:"hyonsuk@knu.ac.kr",web:"https://scholar.google.com/citations?user=v0qUfBUAAAAJ&hl=en",f:"nuc"},
- {n:"파나요티스 베네타토스",major:"통계물리",room:"330",tel:"053-950-7355",mail:"pben@knu.ac.kr",f:"stat"}
+ {n:"강경태",lab:"양자 물성 및 이종구조 연구실 (QPhD)",intro:"페로브스카이트 산화물 박막과 멤브레인, 이종구조로 새로운 양자 물성을 만들고 측정합니다.",kw:["산화물 박막", "페로브스카이트", "이종구조", "멤브레인"],pdf:"labs/kang-kyungtae.pdf",major:"응집물질물리 실험",room:"238",tel:"053-950-5325",mail:"ktkang@knu.ac.kr",web:"https://qphd.notion.site/",f:"cmp"},
+ {n:"김봉재",lab:"계산 물질 물리 연구실",intro:"컴퓨터로 물질 속 전자의 운동방정식을 풀어 물성을 이해하고, 새로운 물질을 설계·예측합니다.",kw:["초전도", "강상관계", "2차원 물질", "배터리 소재"],pdf:"labs/kim-bongjae.pdf",major:"응집물질물리 이론",room:"326",tel:"053-950-5324",mail:"bongjae@knu.ac.kr",web:"https://sites.google.com/site/bjaekim/",f:"cmp"},
+ {n:"도중회",lab:"스핀전자물성 연구실 (Spintronic Materials Lab.)",intro:"펄스 레이저 증착과 스퍼터링으로 자성체·산화물·반도체 박막을 만들고 자기·광 물성을 연구합니다.",kw:["펄스 레이저 증착", "자성 박막", "교환 바이어스", "자기광 커 효과"],pdf:"labs/dho-joonghoe.pdf",major:"응집물질물리",room:"239",tel:"053-950-7354",mail:"jhdho@knu.ac.kr",web:"https://jhdho.knu.ac.kr/",f:"cmp"},
+ {n:"이지은",lab:"2차원 양자물질 연구실",intro:"원자 몇 층 두께의 2차원 양자물질을 만들고, ARPES로 전자구조를 측정해 새로운 양자상태를 찾습니다.",kw:["ARPES", "2차원 물질", "고온 자성체", "위상 물질"],pdf:"labs/lee-jieun.pdf",major:"응집물질물리",room:"333",tel:"053-950-7350",mail:"lee.jieun@knu.ac.kr",f:"cmp"},
+ {n:"조연정",lab:"양자극한물성 연구실 (QCMP)",intro:"강상관계 물질의 양자 현상을 극저온·고자기장에서 측정하고, 대칭성을 제어해 새로운 양자상태를 발굴합니다.",kw:["양자진동", "토크 자력계", "이상 홀 효과", "2D 반데르발스 자성체"],pdf:"labs/jo-younjung.pdf",major:"응집물질물리",room:"324",tel:"053-950-7352",mail:"jophy@knu.ac.kr",web:"https://sites.google.com/view/labqcmp/",f:"cmp"},
+ {n:"김도형",lab:"나노 응용물리연구실",intro:"나노 구조물과 나노시스템을 설계·합성하고 전자적·광학적·자기적 특성을 조사해 디스플레이와 바이오·의료 분야에 응용합니다.",kw:["나노구조 합성", "성장 메커니즘", "전계 방출", "바이오 응용"],major:"나노물리 · 응집물질물리",room:"240",tel:"053-950-5319",mail:"kimdh@knu.ac.kr",f:"nano"},
+ {n:"이형철",lab:"나노물성연구실 (NPL)",intro:"2 K, 7 T 극한 환경에서 초전도체·자성체·나노구조물의 전기·자기·열적 특성을 측정해 거시적 양자현상을 연구합니다.",kw:["초전도", "나노 물성", "비열·열전도도", "저온 홀소자 현미경"],major:"나노물리 · 응집물질물리",room:"327",tel:"053-950-5328",mail:"hcri@knu.ac.kr",f:"nano"},
+ {n:"노창석",lab:"양자정보이론연구실",intro:"열린 양자계와 양자 메트롤로지, 가우시안 양자정보 이론을 연구합니다.",kw:["열린 양자계", "양자 메트롤로지", "양자 시뮬레이션"],pdf:"labs/noh-changsuk.pdf",major:"광학 및 양자정보",room:"328",tel:"053-950-5317",mail:"cnoh@knu.ac.kr",f:"opt"},
+ {n:"여준엽",lab:"응용나노광학연구실 (NANO Lab)",intro:"레이저로 금속·전이금속 산화물 나노물질의 격자를 제어해 광학·전기적 특성을 바꾸고 웨어러블 소자로 응용합니다.",kw:["레이저 공정", "나노소재", "웨어러블 소자", "에너지 소자"],pdf:"labs/yeo-junyeob.pdf",major:"광학 및 양자정보 · 나노물리",room:"241",tel:"053-950-7360",mail:"junyeob@knu.ac.kr",web:"https://sites.google.com/site/junyeob/",f:"opt"},
+ {n:"조명래",lab:"양자전자소자 연구실",intro:"나노 공정으로 만든 소자를 10 mK 극저온과 고자기장에서 측정해 양자 현상을 연구합니다.",kw:["나노소자 공정", "희석 냉동기", "초전도 큐빗", "양자홀"],pdf:"labs/jo-myunglae.pdf",major:"양자과학기술 실험",room:"331",tel:"053-950-5320",mail:"myunglae.jo@knu.ac.kr",web:"https://sites.google.com/view/qedlab/home",f:"opt"},
+ {n:"강국현",lab:"Silicon Detector for high-energy Physics (S:DP)",intro:"실리콘 방사선 검출기를 직접 만들고 측정해 Belle II 실험과 방사선 영상 기술에 활용합니다.",kw:["Belle II", "실리콘 검출기", "Geant4", "검출기 모듈 제작"],pdf:"labs/kang-kookhyun.pdf",major:"고에너지물리",room:"234",tel:"053-950-7373",mail:"khkang@knu.ac.kr",f:"hep"},
+ {n:"김홍주",lab:"중성미자·암흑물질 실험",intro:"중성미자와 암흑물질의 희귀 상호작용을 연구하고, 섬광 결정검출기와 광센서를 개발해 지하실험실에서 실험합니다.",kw:["이중베타붕괴", "KIMS", "섬광 검출기", "지하실험실"],major:"고에너지물리",room:"236",tel:"053-950-5323",mail:"hongjoo@knu.ac.kr",web:"http://rnd2.knu.ac.kr:8080/",f:"hep"},
+ {n:"문창성",lab:"고에너지물리실험 연구실 (Moon-lab)",intro:"CERN LHC 충돌 데이터를 AI·빅데이터로 분석해 표준모형을 검증하고 암흑물질과 초대칭 입자를 찾습니다.",kw:["CERN CMS", "머신러닝", "암흑물질", "중이온 충돌"],pdf:"labs/moon-changsung.pdf",major:"고에너지물리",room:"235",tel:"053-950-6383",mail:"csmoon@knu.ac.kr",web:"https://cern.ch/csmoon",f:"hep"},
+ {n:"박정식",lab:"중성미자 연구실",intro:"비활성 중성미자와 암흑물질을 찾고, 액체섬광물질과 검출기·데이터 수집 시스템을 개발합니다.",kw:["JSNS²", "RENE", "COSINE", "액체섬광물질"],pdf:"labs/park-jungsic.pdf",major:"고에너지물리",room:"237",tel:"053-950-5321",mail:"jungsicpark@knu.ac.kr",f:"hep"},
+ {n:"배규정",lab:"입자물리 이론",intro:"암흑물질 모형과 초대칭 같은 표준모형 확장 이론을 세우고, 가속기·초기우주·우주선에서 나타나는 현상과 연결합니다.",kw:["암흑물질", "초대칭", "입자 현상론", "양자센싱"],pdf:"labs/bae-kyujung.pdf",major:"고에너지물리",room:"329",tel:"053-950-5326",mail:"kyujung.bae@knu.ac.kr",f:"hep"},
+ {n:"윤석훈",lab:"입자우주론 · 천체입자물리",intro:"별과 초신성을 극한 환경의 실험실로 삼아 새로운 입자와 물리를 탐색합니다.",kw:["천체입자물리", "초신성", "새로운 입자", "우주론 관측"],pdf:"labs/yun-seokhoon.pdf",major:"입자우주론 · 천체입자물리",room:"332",tel:"053-950-7349",mail:"seokhoon.yun@knu.ac.kr",f:"hep"},
+ {n:"이세욱",lab:"입자물리실험 연구실",intro:"미래 렙톤 충돌기용 이중판독 칼로리미터 개발, CMS 실험, 자기홀극 탐색, 의료물리 연구를 합니다.",kw:["이중판독 칼로리미터", "CMS", "자기홀극 (KaeM)", "의료물리"],pdf:"labs/lee-sehwook.pdf",major:"고에너지물리",room:"232",tel:"053-950-7372",mail:"sehwook.lee@knu.ac.kr",web:"http://majorana.knu.ac.kr/",f:"hep"},
+ {n:"김신형",lab:"하드론핵물리연구실 (Hadron and Nuclear Physics Lab)",intro:"J-PARC 등에서 펜타쿼크·테트라쿼크 같은 이색 강입자를 찾아 강한 상호작용을 연구합니다.",kw:["J-PARC", "펜타쿼크", "시간투영검출기", "검출기 개발"],pdf:"labs/kim-shinhyung.pdf",major:"핵물리",room:"325",tel:"053-950-5327",mail:"shinhyung@knu.ac.kr",f:"nuc"},
+ {n:"조현석",lab:"핵물리 실험 연구실",intro:"제퍼슨 연구소와 EIC에서 핵자 구조를, AMoRE 실험에서 중성미자 미방출 이중베타 붕괴를 연구합니다.",kw:["Jefferson Lab", "EIC", "AMoRE", "검출기 개발"],pdf:"labs/jo-hyonsuk.pdf",major:"핵물리",room:"233",tel:"053-950-7377",mail:"hyonsuk@knu.ac.kr",web:"https://scholar.google.com/citations?user=v0qUfBUAAAAJ&hl=en",f:"nuc"},
+ {n:"파나요티스 베네타토스",lab:"Soft Matter Theory Lab",intro:"통계역학으로 고분자와 생체고분자 같은 연성물질의 탄성과 수송 현상을 이론적으로 이해합니다.",kw:["연성물질", "고분자 탄성", "통계역학", "분자 모터"],pdf:"labs/benetatos-panayotis.pdf",major:"통계물리",room:"330",tel:"053-950-7355",mail:"pben@knu.ac.kr",f:"stat"}
 ];
 let active="all";
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -324,12 +327,14 @@ const person=p=>`<div class="person">
   <img src="data:image/jpeg;base64,${PHOTO[p.n]||""}" alt="${esc(p.n)} 교수" loading="lazy" width="64" height="80">
   <div class="info">
     <div class="nm">${esc(p.n)}</div>
-    <div class="mj">${esc(p.major)}</div>
+    <div class="mj">${esc(p.lab||p.major)}</div>
     <div class="ct">
       <span>미래융합과학관 ${esc(p.room)}호 · ${esc(p.tel)}</span>
       <span class="mail"><span>${esc(p.mail)}</span><button class="copy" type="button" data-copy="${esc(p.mail)}">복사</button></span>
     </div>
-    ${(p.web||p.promo||p.video)?`<div class="links">${p.web?`<a href="${esc(p.web)}" target="_blank" rel="noopener">홈페이지 ›</a>`:""}${p.promo?`<a href="${esc(p.promo)}" target="_blank" rel="noopener">연구실 소개자료 ›</a>`:""}${p.video?`<a href="${esc(p.video)}" target="_blank" rel="noopener">소개 영상 ›</a>`:""}</div>`:""}
+    ${p.intro?`<p class="intro">${esc(p.intro)}</p>`:""}
+    ${p.kw?`<div class="kw">${p.kw.map(k=>`<span>${esc(k)}</span>`).join("")}</div>`:""}
+    ${(p.web||p.pdf||p.video)?`<div class="links">${p.web?`<a href="${esc(p.web)}" target="_blank" rel="noopener">홈페이지 ›</a>`:""}${p.pdf?`<a href="${esc(p.pdf)}" target="_blank" rel="noopener">소개자료 PDF ›</a>`:""}${p.video?`<a href="${esc(p.video)}" target="_blank" rel="noopener">소개 영상 ›</a>`:""}</div>`:""}
   </div>
 </div>`;
 function render(){
@@ -337,7 +342,7 @@ function render(){
   let html="";
   for(const f of FIELDS){
     if(active!=="all"&&active!==f.id)continue;
-    const ps=P.filter(p=>p.f===f.id&&(!q||(p.n+p.major+p.mail).toLowerCase().includes(q)));
+    const ps=P.filter(p=>p.f===f.id&&(!q||(p.n+p.major+p.mail+(p.lab||"")+(p.intro||"")+(p.kw||[]).join(" ")).toLowerCase().includes(q)));
     if(!ps.length)continue;
     html+=`<div class="field" style="--c:${f.c};--t:${f.t}">
       <div class="sign"><div><div class="en">${f.en}</div><h3>${f.ko}</h3><p>${f.d}</p><div class="count">교수 ${P.filter(p=>p.f===f.id).length}명</div></div>${ICON[f.id]}</div>
