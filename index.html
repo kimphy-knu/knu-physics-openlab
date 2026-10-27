@@ -10,19 +10,15 @@
 <style>
 body{margin:0}img{max-width:100%}[hidden]{display:none!important}
 
-/* Layout: translucent sticky nav → quiet centered hero → two event tiles → per-field "sign" panel followed by its faculty rows */
+/* Layout (single light theme, poster colors): translucent nav → poster-blue hero band → two event tiles → per-field "sign" panel followed by its faculty rows */
 :root{
-  --bg:#f5f5f7; --surface:#ffffff; --fg:#1d1d1f; --muted:#6e6e73; --faint:#86868b;
-  --line:#d2d2d7; --accent:#1f66b3; --accent-soft:#e8f0fa; --sign:#fbfbfd; --nav:rgba(245,245,247,.78);
+  --bg:#eef3fa; --surface:#ffffff; --fg:#13233d; --muted:#51617a; --faint:#7a889e;
+  --line:#d6dfec; --accent:#2564ad; --blue:#2a6db3; --blue-deep:#1d4f8c; --lime:#d6e146; --lime-ink:#1f2b05;
+  --nav:rgba(255,255,255,.84);
   --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
   --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#000000; --surface:#1c1c1e; --fg:#f5f5f7; --muted:#a1a1a6; --faint:#8e8e93;
-  --line:#38383a; --accent:#5aa2f0; --accent-soft:#17263a; --sign:#141416; --nav:rgba(22,22,23,.78); color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#000000; --surface:#1c1c1e; --fg:#f5f5f7; --muted:#a1a1a6; --faint:#8e8e93;
-  --line:#38383a; --accent:#5aa2f0; --accent-soft:#17263a; --sign:#141416; --nav:rgba(22,22,23,.78); color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.5;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;word-break:keep-all}
@@ -40,17 +36,23 @@ nav a.l{font-size:13px;color:var(--fg);opacity:.8}
 nav a.l:hover{opacity:1;text-decoration:none}
 
 /* hero */
-.hero{text-align:center;padding-block:96px 72px}
-.hero .kicker{font-size:19px;font-weight:600;color:var(--accent);margin:0 0 10px}
-.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,7vw,72px);line-height:1.08;letter-spacing:-.035em;margin:0 auto;max-width:12em;text-wrap:balance}
-.hero .sub{font-size:clamp(19px,2.4vw,24px);color:var(--muted);margin:18px auto 0;max-width:30em;line-height:1.4;text-wrap:balance}
-.hero .meta{margin-top:28px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px 28px;font-size:17px}
-.hero .meta span{color:var(--fg);font-weight:500}
-.hero .meta b{color:var(--faint);font-weight:400;margin-right:8px}
-.cta{margin-top:32px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
-.pill{display:inline-block;background:var(--accent);color:#fff;border-radius:980px;padding:11px 22px;font-size:17px;font-weight:500}
-.pill:hover{text-decoration:none;filter:brightness(1.08)}
-.textlink{font-size:17px;padding:11px 4px}
+.hero{position:relative;overflow:hidden;background:var(--blue);color:#fff;text-align:center;padding-block:96px 88px}
+.hero .wrap{position:relative;z-index:1}
+.deco{position:absolute;border-radius:50%;pointer-events:none}
+.deco.ring{width:min(46vw,420px);aspect-ratio:1;border:1.5px solid rgba(214,225,70,.55);left:-10%;top:-22%}
+.deco.ring2{width:min(30vw,260px);aspect-ratio:1;border:1.5px solid rgba(255,255,255,.28);right:-6%;bottom:-18%}
+.deco.dot{width:min(12vw,96px);aspect-ratio:1;background:var(--lime);right:12%;top:16%}
+.deco.dot2{width:22px;height:22px;background:var(--lime);left:16%;bottom:18%}
+.hero .kicker{font-size:19px;font-weight:700;color:var(--lime);margin:0 0 12px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,72px);line-height:1.08;letter-spacing:-.035em;margin:0 auto;max-width:12em;text-wrap:balance}
+.hero .sub{font-size:clamp(19px,2.4vw,24px);color:rgba(255,255,255,.86);margin:18px auto 0;max-width:30em;line-height:1.4;text-wrap:balance}
+.hero .meta{margin-top:30px;display:inline-flex;flex-wrap:wrap;justify-content:center;gap:8px 28px;font-size:17px;background:rgba(255,255,255,.12);border-radius:14px;padding:12px 22px}
+.hero .meta span{font-weight:600}
+.hero .meta b{color:var(--lime);font-weight:600;margin-right:8px}
+.cta{margin-top:30px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.pill{display:inline-block;background:var(--lime);color:var(--lime-ink);border-radius:980px;padding:12px 24px;font-size:17px;font-weight:700}
+.pill:hover{text-decoration:none;filter:brightness(1.05)}
+.textlink{font-size:17px;padding:12px 4px;color:#fff;font-weight:600}
 
 /* event */
 section{padding-block:40px 80px}
@@ -64,6 +66,13 @@ section{padding-block:40px 80px}
 .tile .who div{display:flex;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid var(--line);font-size:16px}
 .tile .who div span{color:var(--muted);text-align:right}
 .tile p{margin:0;color:var(--muted);font-size:16px}
+.tile.lime{background:var(--lime);color:var(--lime-ink)}
+.tile.lime .when{color:var(--lime-ink);opacity:.75}
+.tile.lime .who div{border-top-color:rgba(31,43,5,.18)}
+.tile.lime .who div span{color:rgba(31,43,5,.7)}
+.tile.blue{background:var(--blue-deep);color:#fff}
+.tile.blue .when{color:var(--lime)}
+.tile.blue p{color:rgba(255,255,255,.82)}
 .facts{margin-top:20px;background:var(--surface);border-radius:22px;padding:8px 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 32px}
 .facts div{padding-block:20px;min-width:0}
 .facts dt{font-size:13px;color:var(--faint);margin-bottom:2px}
@@ -71,42 +80,42 @@ section{padding-block:40px 80px}
 
 /* faculty controls */
 .controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:48px}
-.seg{display:flex;flex-wrap:wrap;gap:4px;background:color-mix(in srgb,var(--line) 45%,transparent);padding:4px;border-radius:12px}
-.seg button{border:0;background:transparent;color:var(--fg);font:500 14px var(--font);padding:7px 14px;border-radius:9px;cursor:pointer;letter-spacing:-.01em}
-.seg button[aria-pressed="true"]{background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:var(--surface);color:var(--fg);font:500 14px var(--font);padding:8px 16px;border-radius:999px;cursor:pointer;letter-spacing:-.01em}
+.seg button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
 .find{flex:1 1 200px;min-width:0;max-width:280px;margin-left:auto;position:relative}
-.find input{width:100%;padding:9px 14px 9px 36px;border-radius:12px;border:0;background:color-mix(in srgb,var(--line) 45%,transparent);color:var(--fg);font:15px var(--font)}
+.find input{width:100%;padding:9px 14px 9px 36px;border-radius:12px;border:0;background:var(--surface);color:var(--fg);font:15px var(--font);border:1px solid var(--line)}
 .find svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--faint)}
 
 /* field sign */
-.field{margin-bottom:72px}
-.sign{background:var(--sign);border:1px solid var(--line);border-radius:22px;padding:32px 36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin-bottom:8px}
-.sign .en{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.02em}
-.sign h3{font-family:var(--display);font-size:clamp(28px,4vw,38px);font-weight:700;letter-spacing:-.03em;margin:4px 0 8px;line-height:1.15}
+.field{margin-bottom:64px}
+.sign{background:var(--t);border-radius:22px;padding:32px 36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin-bottom:14px}
+.sign .en{font-size:13px;font-weight:700;color:var(--c);letter-spacing:.02em}
+.sign h3{font-family:var(--display);font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.03em;margin:4px 0 8px;line-height:1.15;color:var(--fg)}
 .sign p{margin:0;color:var(--muted);font-size:16px;max-width:30em}
-.sign .count{margin-top:14px;font-size:14px;color:var(--faint);font-variant-numeric:tabular-nums}
-.sign svg{width:132px;height:96px;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.sign svg .dot{fill:var(--accent);stroke:none}
-.sign svg .soft{stroke:var(--line)}
+.sign .count{display:inline-block;margin-top:14px;font-size:13px;font-weight:700;color:#fff;background:var(--c);border-radius:999px;padding:3px 11px;font-variant-numeric:tabular-nums}
+.sign svg{width:132px;height:96px;stroke:var(--c);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sign svg .dot{fill:var(--c);stroke:none}
+.sign svg .soft{stroke:var(--c);opacity:.3}
 
 /* faculty list */
-.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:0 32px}
-.person{display:grid;grid-template-columns:64px 1fr;gap:16px;padding-block:20px;border-bottom:1px solid var(--line);align-items:start;min-width:0}
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.person{background:var(--surface);border-radius:18px;padding:18px;display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:start;min-width:0;box-shadow:0 1px 2px rgba(19,35,61,.05)}
 .person img{width:64px;height:80px;object-fit:cover;border-radius:12px;background:var(--line)}
 .person .info{min-width:0;display:grid;gap:2px}
-.person .nm{font-size:19px;font-weight:600;letter-spacing:-.02em}
-.person .mj{font-size:14px;color:var(--muted)}
-.person .ct{margin-top:8px;font-size:13px;color:var(--faint);display:grid;gap:1px;font-variant-numeric:tabular-nums}
+.person .nm{font-size:19px;font-weight:700;letter-spacing:-.02em}
+.person .mj{font-size:14px;color:var(--c);font-weight:600}
+.person .ct{margin-top:8px;font-size:13px;color:var(--muted);display:grid;gap:1px;font-variant-numeric:tabular-nums}
 .person .ct .mail{display:flex;gap:8px;align-items:center;min-width:0}
 .person .ct .mail span{overflow-wrap:anywhere;min-width:0}
-.person .copy{border:0;background:none;color:var(--accent);font:13px var(--font);padding:0;cursor:pointer;flex:none}
-.person .web{margin-top:8px;font-size:14px;font-weight:500}
+.person .copy{border:0;background:none;color:var(--accent);font:600 13px var(--font);padding:0;cursor:pointer;flex:none}
+.person .web{margin-top:8px;font-size:14px;font-weight:600}
 .empty{color:var(--muted);padding:40px 0;text-align:center}
 
 /* close */
-.close{text-align:center;padding-block:88px;background:var(--surface)}
+.close{text-align:center;padding-block:88px;background:var(--blue);color:#fff}
 .close h2{font-family:var(--display);font-size:clamp(30px,4.6vw,48px);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin:0 auto;max-width:14em;text-wrap:balance}
-.close p{color:var(--muted);font-size:19px;margin:16px 0 0}
+.close p{color:var(--lime);font-weight:700;font-size:19px;margin:16px 0 0}
 footer{font-size:12px;color:var(--faint);padding-block:24px 40px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;border-top:1px solid var(--line);padding-top:16px}
 @media (max-width:600px){
@@ -130,6 +139,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
 </nav>
 
 <header class="hero">
+  <span class="deco ring" aria-hidden="true"></span><span class="deco ring2" aria-hidden="true"></span><span class="deco dot" aria-hidden="true"></span><span class="deco dot2" aria-hidden="true"></span>
   <div class="wrap">
     <p class="kicker">경북대학교 물리학과</p>
     <h1>2026년 하반기 대학원 설명회</h1>
@@ -151,7 +161,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
       <h2 class="sec-title">두 번의 수요일.</h2>
       <p class="sec-lede">첫 주에는 산업체와 연구소로 진출한 동문 선배를, 둘째 주에는 물리학과 대학원 연구실을 소개합니다.</p>
       <div class="tiles">
-        <article class="tile">
+        <article class="tile lime">
           <span class="when">Part 1 · 11월 4일 수요일</span>
           <h3>동문과의 대화</h3>
           <div class="who">
@@ -159,7 +169,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
             <div><b>김무용</b><span>한국핵융합에너지연구원</span></div>
           </div>
         </article>
-        <article class="tile">
+        <article class="tile blue">
           <span class="when">Part 2 · 11월 11일 수요일</span>
           <h3>연구실 소개</h3>
           <p>물리학과 대학원 각 연구실이 연구 주제와 분위기를 직접 소개합니다. 아래에서 관심 있는 연구실을 미리 살펴보세요.</p>
@@ -211,12 +221,12 @@ const ICON={
  stat:`<svg viewBox="0 0 132 96" aria-hidden="true"><path class="soft" d="M6 88H126M6 88V8"/><path d="${(()=>{let x=8,y=60,p="M8 60",s=7;for(let i=0;i<58;i++){s=(s*9301+49297)%233280;const r=s/233280;x+=2;y+=(r-0.5)*11;y=Math.max(14,Math.min(82,y));p+=`L${x} ${y.toFixed(1)}`}return p})()}"/><circle class="dot" cx="124" cy="40" r="3"/></svg>`
 };
 const FIELDS=[
- {id:"cmp",ko:"응집물질물리",en:"Condensed Matter Physics",d:"고체 속 수많은 전자가 함께 만들어내는 자성, 초전도, 위상 현상을 실험과 이론으로 탐구합니다."},
- {id:"nano",ko:"나노물리",en:"Nano Physics",d:"나노미터 크기의 구조와 소자에서 나타나는 새로운 물리를 연구합니다."},
- {id:"opt",ko:"광학 및 양자정보",en:"Optics & Quantum Information",d:"빛과 양자 상태를 정밀하게 다뤄 측정하고, 정보를 처리하는 방법을 연구합니다."},
- {id:"hep",ko:"고에너지물리",en:"High Energy Physics",d:"가속기 실험과 우주 관측으로 기본 입자와 그 상호작용을 연구합니다."},
- {id:"nuc",ko:"핵물리",en:"Nuclear Physics",d:"원자핵의 구조와 핵반응을 실험으로 연구합니다."},
- {id:"stat",ko:"통계물리",en:"Statistical Physics",d:"많은 입자가 모인 계에서 나타나는 집단 현상과 요동을 다룹니다."}
+ {id:"cmp",c:"#2a6db3",t:"#e1ecf9",ko:"응집물질물리",en:"Condensed Matter Physics",d:"고체 속 수많은 전자가 함께 만들어내는 자성, 초전도, 위상 현상을 실험과 이론으로 탐구합니다."},
+ {id:"nano",c:"#0d8577",t:"#dcf2ee",ko:"나노물리",en:"Nano Physics",d:"나노미터 크기의 구조와 소자에서 나타나는 새로운 물리를 연구합니다."},
+ {id:"opt",c:"#6247cf",t:"#ebe6fb",ko:"광학 및 양자정보",en:"Optics & Quantum Information",d:"빛과 양자 상태를 정밀하게 다뤄 측정하고, 정보를 처리하는 방법을 연구합니다."},
+ {id:"hep",c:"#cf4b2b",t:"#fbe7e0",ko:"고에너지물리",en:"High Energy Physics",d:"가속기 실험과 우주 관측으로 기본 입자와 그 상호작용을 연구합니다."},
+ {id:"nuc",c:"#a87600",t:"#f7eed4",ko:"핵물리",en:"Nuclear Physics",d:"원자핵의 구조와 핵반응을 실험으로 연구합니다."},
+ {id:"stat",c:"#378a37",t:"#e2f1e0",ko:"통계물리",en:"Statistical Physics",d:"많은 입자가 모인 계에서 나타나는 집단 현상과 요동을 다룹니다."}
 ];
 const P=[
  {n:"강경태",major:"응집물질물리 실험",room:"238",tel:"053-950-5325",mail:"ktkang@knu.ac.kr",web:"https://qphd.notion.site/",f:"cmp"},
@@ -261,7 +271,7 @@ function render(){
     if(active!=="all"&&active!==f.id)continue;
     const ps=P.filter(p=>p.f===f.id&&(!q||(p.n+p.major+p.mail).toLowerCase().includes(q)));
     if(!ps.length)continue;
-    html+=`<div class="field">
+    html+=`<div class="field" style="--c:${f.c};--t:${f.t}">
       <div class="sign"><div><div class="en">${f.en}</div><h3>${f.ko}</h3><p>${f.d}</p><div class="count">교수 ${P.filter(p=>p.f===f.id).length}명</div></div>${ICON[f.id]}</div>
       <div class="people">${ps.map(person).join("")}</div></div>`;
   }
