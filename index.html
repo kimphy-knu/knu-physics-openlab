@@ -135,6 +135,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
 .spk dt{font-size:12px;font-weight:700;color:var(--faint);letter-spacing:.04em}
 .spk dd{margin:2px 0 0;font-size:15px;color:var(--fg)}
 .spk dd.soon{color:var(--faint)}
+.spk dd.ttl{font-size:18px;font-weight:700;line-height:1.4;letter-spacing:-.02em}
+.spk .cover{display:block;position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;max-width:100%;background:var(--bg)}
+.spk .cover img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.spk .cover span{position:absolute;right:10px;bottom:10px;background:rgba(19,35,61,.82);color:#fff;font-size:13px;font-weight:600;border-radius:999px;padding:5px 12px}
+.spk .cover:hover img{transform:scale(1.02)}
+.spk .cover:hover{text-decoration:none}
+.spk .deck{font-size:15px;font-weight:600;justify-self:start}
 .person .intro{margin:8px 0 0;font-size:14px;line-height:1.55;color:var(--fg)}
 .person .kw{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .person .kw span{font-size:12px;font-weight:600;color:var(--c);background:var(--t);border-radius:999px;padding:3px 10px}
@@ -161,7 +168,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
   .sign svg{width:88px;height:64px}
   .find{max-width:none;margin-left:0}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.spk .cover img{transition:none}}
 </style>
 </head>
 <body>
@@ -279,8 +286,8 @@ const FORM1=""; // 11/4 동문과의 대화 질문지
 const FORM2=""; // 11/11 대학원 진학 질문지
 // 연사 소개: 자료를 받으면 topic, bio 채우기
 const SPEAKERS=[
- {n:"방정배",org:"(주)라덱셀",topic:"",bio:""},
- {n:"김무용",org:"한국핵융합에너지연구원",topic:"",bio:""}
+ {n:"방정배",org:"(주)라덱셀 부사장 · 기업부설연구소장",topic:"물리를 통해 방사선 암치료의 한계를 넘어, 세계로",bio:"경북대 물리학과에서 학사와 가속기물리 석·박사 학위를 받았습니다. MIT 연구원, 고려대 가속기과학과 교수, 강원대병원 방사선종양학과를 거쳐 방사선 치료기를 만드는 라덱셀에서 연구개발을 이끌고 있습니다.",pdf:"talks/bang-jungbae.pdf",cover:"talks/bang-jungbae-cover.jpg"},
+ {n:"김무용",org:"한국핵융합에너지연구원 초전도극저온그룹",topic:"초전도 선재 특성 연구에서 핵융합 자석까지",bio:"경북대 물리학과 나노물성연구실에서 고온초전도 선재 연구로 석·박사 학위를 받았습니다. 광통신 기업 InLC를 거쳐 지금은 KSTAR 초전도 자석과 100 kA 초전도 전원 장치를 개발하고 있습니다.",pdf:"talks/kim-muyong.pdf",cover:"talks/kim-muyong-cover.jpg"}
 ];
 const ICON={
  cmp:`<svg viewBox="0 0 132 96" aria-hidden="true">${[0,1,2,3].map(r=>[0,1,2,3,4].map(c=>{const x=18+c*24,y=14+r*22,up=(r+c)%2===0;return `<circle class="dot" cx="${x}" cy="${y}" r="2.4"/><path d="M${x} ${up?y+7:y-7}V${up?y-7:y+7}M${x-3} ${up?y-4:y+4}L${x} ${up?y-7:y+7}L${x+3} ${up?y-4:y+4}"/>`}).join("")).join("")}</svg>`,
@@ -361,9 +368,11 @@ document.getElementById("list").addEventListener("click",e=>{
 });
 seg();render();
 document.getElementById("speakers").innerHTML=SPEAKERS.map(s=>`<article class="spk">
+  ${s.cover?`<a class="cover" href="${esc(s.pdf)}" target="_blank" rel="noopener" aria-label="${esc(s.n)} 발표자료 열기"><img src="${esc(s.cover)}" alt="${esc(s.topic)} 발표자료 첫 페이지" loading="lazy" width="960" height="540"><span>발표자료 보기 ›</span></a>`:""}
   <div class="top"><div class="ini" aria-hidden="true">${esc(s.n[0])}</div><div><div class="nm">${esc(s.n)}</div><div class="org">${esc(s.org)}</div></div></div>
-  <dl><div><dt>발표 주제</dt><dd class="${s.topic?"":"soon"}">${s.topic?esc(s.topic):"곧 안내드립니다."}</dd></div>
+  <dl><div><dt>발표 제목</dt><dd class="${s.topic?"ttl":"soon"}">${s.topic?esc(s.topic):"곧 안내드립니다."}</dd></div>
   <div><dt>연사 소개</dt><dd class="${s.bio?"":"soon"}">${s.bio?esc(s.bio):"곧 안내드립니다."}</dd></div></dl>
+  ${s.pdf?`<a class="deck" href="${esc(s.pdf)}" target="_blank" rel="noopener">발표자료 PDF ›</a>`:""}
 </article>`).join("");
 [["form1",FORM1],["form2",FORM2]].forEach(([id,u])=>{const a=document.getElementById(id);if(u){a.href=u}else{a.classList.add("off");a.textContent="질문지 준비 중";a.removeAttribute("href")}});
 </script>
